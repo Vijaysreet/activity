@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .data-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .data-table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Activity Monitoring</h1>
+        <form id="activityForm">
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div>
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+            <div>
+                <label for="steps">Steps Taken:</label>
+                <input type="number" id="steps" name="steps" placeholder="e.g., 5000" required>
+            </div>
+            <div>
+                <label for="running">Running Distance (km):</label>
+                <input type="number" id="running" name="running" placeholder="e.g., 5" required>
+            </div>
+            <div>
+                <label for="sleep">Sleep Duration (hours):</label>
+                <input type="number" id="sleep" name="sleep" step="0.1" placeholder="e.g., 7.5" required>
+            </div>
+            <div>
+                <label for="water">Water Intake (liters):</label>
+                <input type="number" id="water" name="water" step="0.1" placeholder="e.g., 2.5" required>
+            </div>
+            <input type="submit" value="Save Activity">
+        </form>
+
+        <table class="data-table" id="activityTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Full Name</th>
+                    <th>Steps</th>
+                    <th>Running (km)</th>
+                    <th>Sleep (hours)</th>
+                    <th>Water (liters)</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('activityForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            const date = document.getElementById('date').value;
+            const fullName = document.getElementById('fullName').value;
+            const steps = document.getElementById('steps').value;
+            const running = document.getElementById('running').value;
+            const sleep = document.getElementById('sleep').value;
+            const water = document.getElementById('water').value;
+
+            const tableBody = document.getElementById('activityTable').querySelector('tbody');
+
+            // Add the data to the table
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${date}</td>
+                <td>${fullName}</td>
+                <td>${steps}</td>
+                <td>${running}</td>
+                <td>${sleep}</td>
+                <td>${water}</td>
+            `;
+            tableBody.appendChild(row);
+
+            // Clear form fields
+            document.getElementById('activityForm').reset();
+
+            // Example of showing confirmation to the user
+            alert('Activity data saved successfully!');
+        });
+    </script>
+</body>
+</html>
